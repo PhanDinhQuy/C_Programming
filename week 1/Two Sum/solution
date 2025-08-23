@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* twoSum(int* nums, int Numsize, int target, int* ret_size) {
+    int* result = malloc(2 * sizeof(int));
+    for (int i = 0; i < Numsize - 1; i++) {
+        for (int j = i + 1; j < Numsize; j++) {
+            if (nums[i] + nums[j] == target) {
+                result[0] = i;
+                result[1] = j;
+                *ret_size = 2;
+                return result; 
+            }
+        }
+    }
+    *ret_size = 0;
+    return NULL;
+}
