@@ -1,0 +1,24 @@
+char* intToRoman(int num) {
+    const int value[] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    const char *symbol[] = {"M","CM", "D", "CD", "C", "XC", "L", "XL","X", "IX","V","IV","I"};
+    const int N = sizeof(value)/sizeof(value[0]);
+
+    char *result = malloc(32); // constrain 1 <= num <= 3999
+    if (!result) return NULL;
+
+    int position = 0;
+    for(int i=0; i<N; i++)
+    {
+        while (num >= value[i])
+        {
+            const char *sym = symbol[i];
+            for (int j = 0; sym[j] != '\0'; j++)
+            {
+                result[position++] = sym[j];
+            }
+            num = num - value[i];
+        } 
+    }
+    result[position] = '\0';
+    return result;
+}
