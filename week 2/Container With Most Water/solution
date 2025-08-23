@@ -1,0 +1,19 @@
+int maxArea(int* height, int n) {
+    int L = 0, R = n - 1;
+    int maxArea = 0;
+
+    while (L < R) {
+        int h = (height[L] < height[R]) ? height[L] : height[R];
+        int area = h * (R - L);
+        if (area > maxArea) {
+            maxArea = area;
+        }
+
+        if (height[L] < height[R]) {
+            L++;
+        } else {
+            R--;
+        }
+    }
+    return maxArea;
+}
