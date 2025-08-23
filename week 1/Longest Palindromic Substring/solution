@@ -1,0 +1,33 @@
+static int expand(const char* s, int L, int R)
+{
+    int len = strlen(s);
+    while(L >= 0 && R < len && s[L] == s[R]){
+        L--;
+        R++;
+    }
+    return R - L - 1;
+}
+
+char* longestPalindrome(char *s) {
+    int len = strlen(s);
+    if( len < 2)
+    { return strdup(s); }
+
+    int start =0, max =1;
+    for (int i=0; i < len; i++)
+    {
+        int len1 = expand(s,i,i);
+        int len2 = expand(s,i,i+1);
+        int len = (len1 > len2 ? len1 : len2);
+        if(len > max){
+            max = len;
+            start = i - (len - 1) /2;
+        }
+    }
+    
+    char *res = malloc(max +1);
+    if(!res) return NULL;
+    strncpy(res, s + start, max);
+    res[max] = '\0';
+    return res;
+}
