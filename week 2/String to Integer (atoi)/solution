@@ -1,0 +1,38 @@
+int myAtoi(const char* s) {
+    //1
+    while(*s == ' ')
+    {
+        s++;
+    }
+    
+    //2
+    int sign = 1;
+    if(*s == '-' || *s == '+')
+    {
+        if(*s == '-'){
+            sign = -1;
+        }
+        s++;
+    }
+
+    //3
+    int result = 0;
+    while (isdigit(*s)){
+        int digit = *s - '0';
+
+        //chống overflow
+        if((result > INT_MAX/10) || ((result == INT_MAX/10)&&(digit > 7)))
+        {
+            if(sign == 1)
+            {
+                return INT_MAX;
+            }
+            else return INT_MIN;
+        }
+
+        result = result * 10 + digit;
+        s++;
+    }
+    return sign * result;
+
+}
